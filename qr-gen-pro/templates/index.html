@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QR Generator Pro</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+
+  <header class="header">
+    <div class="logo">QNova</div>
+    <div class="tagline">Fast & personalised QR codes</div>
+  </header>
+
+  <!-- TITLE -->
+
+  <section class="hero">
+    <h1>Generate QR Codes</h1>
+    <p>Create customizable QR codes for URLs, text, WiFi, and contacts in seconds.</p>
+  </section>
+
+  <!-- MAIN CARD -->
+
+  <div class="main-card">
+<!-- CONFIGURE -->
+<div class="config">
+
+  <h3>Configure</h3>
+  <p class="sub">Choose a type and fill in your content.</p>
+<form method="POST" enctype="multipart/form-data">
+
+  <!-- QR TYPE BUTTONS -->
+  <div class="qr-types">
+    <input type="hidden" name="qr_type" id="qr_type" value="text">
+
+    <button type="button" class="type-btn active">URL</button>
+    <button type="button" class="type-btn">Text</button>
+    <button type="button" class="type-btn">WiFi</button>
+    <button type="button" class="type-btn">Contact</button>
+  </div>
+
+  <!-- INPUT -->
+  <label>Content</label></br>
+  <input type="text" name="data" placeholder="Enter text or URL" />
+
+  <!-- CONTACT EXAMPLE FIELDS -->
+  <div class="grid-2">
+    <input type="text" name="name" placeholder="Full Name" />
+    <input type="text" name ="phone" placeholder="Phone" />
+  </div>
+
+  <input type="email" name="email" placeholder="Email" />
+
+  <!-- APPEARANCE -->
+  <h4>Appearance</h4>
+
+  <div class="color-row">
+    <div>
+      <label>Foreground</label>
+      <input type="color" name="color"/>
+    </div>
+
+    <div>
+      <label>Background</label>
+      <input type="color" name="bgcolor" value="#ffffff"/>
+    </div>
+  </div>
+
+  <!-- SIZE SLIDER -->
+  <label>Size</label>
+  <input type="range" name="size" min="6" max="14" value="10" />
+
+
+  <!-- LOGO -->
+  <label>Logo (optional)</label>
+  <input type="file" name="logo"/>
+
+  <!-- GENERATE -->
+  <button type="submit" class="generate-btn">Generate QR Code</button>
+</form>
+</div>
+
+
+  </div>
+
+  <!-- PREVIEW -->
+
+  <div class="preview-card">
+
+<h3>Preview</h3>
+<p class="sub">Configure and generate your QR code</p>
+
+{% if error %}
+  <div class="error-msg">{{ error }}</div>
+{% endif %}
+
+
+{% if qr_code %}
+  <img src="{{ qr_code }}" class="qr-image">
+{% else %}
+  <div class="qr-placeholder">No QR code yet</div>
+{% endif %}
+
+
+<!-- Real QR will replace placeholder -->
+<!-- <img src="{{ qr_code }}" class="qr-image"> -->
+
+  </div>
+
+</div>
+<script>
+document.querySelectorAll(".type-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    document.getElementById("qr_type").value = btn.innerText.toLowerCase();
+  });
+});
+</script>
+
+</body>
+</html>
