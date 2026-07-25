@@ -1,0 +1,19 @@
+to run:
+Install with legacy peer deps to regenerate lockfile:
+
+Bash
+npm install --legacy-peer-deps
+
+then npm run dev
+----------------------
+
+to push in git 
+1) git add .
+2) git commit -m "jhfdj"
+3) git push
+{If your branch is named main:
+bash
+git push origin main
+If your branch is named master:
+bash
+git push origin master}

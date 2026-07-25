@@ -9,22 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DailyRouteImport } from './routes/daily'
-import { Route as ChaptersRouteImport } from './routes/chapters'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as StruggleSlugRouteImport } from './routes/struggle.$slug'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ChaptersRouteImport } from './routes/chapters'
+import { Route as DailyRouteImport } from './routes/daily'
 import { Route as ChaptersChapterRouteImport } from './routes/chapters.$chapter'
+import { Route as StruggleSlugRouteImport } from './routes/struggle.$slug'
 import { Route as VerseChapterVerseRouteImport } from './routes/verse.$chapter.$verse'
 
-const DailyRoute = DailyRouteImport.update({
-  id: '/daily',
-  path: '/daily',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChaptersRoute = ChaptersRouteImport.update({
-  id: '/chapters',
-  path: '/chapters',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -32,20 +27,25 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ChaptersRoute = ChaptersRouteImport.update({
+  id: '/chapters',
+  path: '/chapters',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StruggleSlugRoute = StruggleSlugRouteImport.update({
-  id: '/struggle/$slug',
-  path: '/struggle/$slug',
+const DailyRoute = DailyRouteImport.update({
+  id: '/daily',
+  path: '/daily',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChaptersChapterRoute = ChaptersChapterRouteImport.update({
   id: '/$chapter',
   path: '/$chapter',
   getParentRoute: () => ChaptersRoute,
+} as any)
+const StruggleSlugRoute = StruggleSlugRouteImport.update({
+  id: '/struggle/$slug',
+  path: '/struggle/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const VerseChapterVerseRoute = VerseChapterVerseRouteImport.update({
   id: '/verse/$chapter/$verse',
@@ -122,18 +122,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/daily': {
-      id: '/daily'
-      path: '/daily'
-      fullPath: '/daily'
-      preLoaderRoute: typeof DailyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chapters': {
-      id: '/chapters'
-      path: '/chapters'
-      fullPath: '/chapters'
-      preLoaderRoute: typeof ChaptersRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -143,18 +136,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/chapters': {
+      id: '/chapters'
+      path: '/chapters'
+      fullPath: '/chapters'
+      preLoaderRoute: typeof ChaptersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/struggle/$slug': {
-      id: '/struggle/$slug'
-      path: '/struggle/$slug'
-      fullPath: '/struggle/$slug'
-      preLoaderRoute: typeof StruggleSlugRouteImport
+    '/daily': {
+      id: '/daily'
+      path: '/daily'
+      fullPath: '/daily'
+      preLoaderRoute: typeof DailyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chapters/$chapter': {
@@ -163,6 +156,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/chapters/$chapter'
       preLoaderRoute: typeof ChaptersChapterRouteImport
       parentRoute: typeof ChaptersRoute
+    }
+    '/struggle/$slug': {
+      id: '/struggle/$slug'
+      path: '/struggle/$slug'
+      fullPath: '/struggle/$slug'
+      preLoaderRoute: typeof StruggleSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/verse/$chapter/$verse': {
       id: '/verse/$chapter/$verse'
@@ -197,3 +197,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
