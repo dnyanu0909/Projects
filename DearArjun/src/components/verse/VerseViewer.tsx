@@ -4,9 +4,10 @@ import { getVersesByIds } from "@/content/verses";
 import { ShareCardButton } from "./ShareCardButton";
 import { ShareModal } from "./ShareModal";
 import { SaveVerseButton } from "./SaveVerseButton";
+import { VerseJournal } from "./VerseJournal";
 
 import { GentleNudge } from "./GentleNudge";
-import { ArrowUpRight, Sparkles, Target, MessageCircleQuestion, MapPin, Quote, BookOpen, Layers, Wind } from "lucide-react";
+import { ArrowUpRight, Sparkles, Target, MapPin, Quote, BookOpen, Layers, Wind } from "lucide-react";
 
 export function VerseViewer({ verse }: { verse: Verse }) {
   const related = getVersesByIds(verse.relatedVerseIds);
@@ -79,15 +80,8 @@ export function VerseViewer({ verse }: { verse: Verse }) {
         <p className="mt-4 text-lg leading-relaxed text-foreground">{verse.todaysMission}</p>
       </section>
 
-      {/* 9. Reflection question */}
-      <section className="mt-12 rounded-2xl border border-secondary/40 bg-secondary/10 p-8">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.32em] text-accent">
-          <MessageCircleQuestion className="h-3.5 w-3.5" /> One question before you leave
-        </div>
-        <p className="mt-4 font-display text-xl italic leading-relaxed text-foreground">
-          {verse.reflectionQuestion}
-        </p>
-      </section>
+      {/* 9. Reflection question + journal */}
+      <VerseJournal verse={verse} />
 
       {/* Share */}
       <div className="mt-12 flex flex-wrap items-center gap-3">
