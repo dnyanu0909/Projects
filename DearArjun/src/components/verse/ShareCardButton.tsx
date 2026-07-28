@@ -39,7 +39,7 @@ export function ShareCardButton({ verse }: { verse: Verse }) {
       ctx.fillStyle = "#E5A93C";
       ctx.font = "600 26px Inter, system-ui, sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(`DEAR ARJUNA  ·  ${verse.chapter}.${verse.verse}`, w / 2, 140);
+      ctx.fillText(`DEAR ARJUNA  ·  ${verse.chapterNumber}.${verse.verseNumber}`, w / 2, 140);
 
       // Modern quote (wrap)
       ctx.fillStyle = "#F3F4F6";
@@ -69,7 +69,7 @@ export function ShareCardButton({ verse }: { verse: Verse }) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `dear-arjuna-${verse.chapter}-${verse.verse}.png`;
+      a.download = `dear-arjuna-${verse.chapterNumber}-${verse.verseNumber}.png`;
       a.click();
       URL.revokeObjectURL(url);
     } finally {

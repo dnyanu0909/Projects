@@ -25,8 +25,8 @@ export const Route = createFileRoute("/verse/$chapter/$verse")({
         ],
       };
     }
-    const title = `Ch ${v.chapter}, Verse ${v.verse} — Dear Arjuna`;
-    const desc = `“${v.krishnaModern}” — modern reading of Bhagavad Gita ${v.chapter}.${v.verse}.`;
+    const title = `Ch ${v.chapterNumber}, Verse ${v.verseNumber} — Dear Arjuna`;
+    const desc = `“${v.krishnaModern}” — modern reading of Bhagavad Gita ${v.chapterNumber}.${v.verseNumber}.`;
     return {
       meta: [
         { title },

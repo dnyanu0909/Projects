@@ -6,7 +6,7 @@ export const Route = createFileRoute("/daily")({
     const v = getDailyVerse();
     throw redirect({
       to: "/verse/$chapter/$verse",
-      params: { chapter: String(v.chapter), verse: String(v.verse) },
+      params: { chapter: String(v.chapterNumber), verse: String(v.verseNumber) },
     });
   },
   component: () => null,

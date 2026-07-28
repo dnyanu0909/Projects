@@ -3,6 +3,7 @@ Install with legacy peer deps to regenerate lockfile:
 
 Bash
 npm install --legacy-peer-deps
+npm install html-to-image --legacy-peer-deps
 
 then npm run dev
 ----------------------

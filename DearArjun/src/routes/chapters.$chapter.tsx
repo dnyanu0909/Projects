@@ -51,12 +51,12 @@ function ChapterPage() {
             <div className="mt-6 grid gap-4">
               {verses.map((v: import("@/content/types").Verse) => (
                 <Link
-                  key={v.verse}
+                  key={v.verseNumber}
                   to="/verse/$chapter/$verse"
-                  params={{ chapter: String(v.chapter), verse: String(v.verse) }}
+                  params={{ chapter: String(v.chapterNumber), verse: String(v.verseNumber) }}
                   className="group rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-[var(--shadow-glow)]"
                 >
-                  <div className="text-xs uppercase tracking-[0.28em] text-primary/80">Verse {v.verse}</div>
+                  <div className="text-xs uppercase tracking-[0.28em] text-primary/80">Verse {v.verseNumber}</div>
                   <p className="mt-2 font-display text-lg leading-snug text-foreground md:text-xl">
                     “{v.krishnaModern}”
                   </p>

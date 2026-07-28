@@ -1,10 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import type { Verse } from "@/content/types";
+import { getVersesByIds } from "@/content/verses";
 import { ShareCardButton } from "./ShareCardButton";
+import { ShareModal } from "./ShareModal";
+import { SaveVerseButton } from "./SaveVerseButton";
+
 import { GentleNudge } from "./GentleNudge";
 import { ArrowUpRight, Sparkles, Target, MessageCircleQuestion, MapPin, Quote, BookOpen, Layers, Wind } from "lucide-react";
 
 export function VerseViewer({ verse }: { verse: Verse }) {
+  const related = getVersesByIds(verse.relatedVerseIds);
+
   return (
     <article className="mx-auto max-w-3xl px-6 pb-24 pt-10">
       {/* 1. Scene */}
@@ -12,7 +18,7 @@ export function VerseViewer({ verse }: { verse: Verse }) {
         <MapPin className="h-3.5 w-3.5" /> Scene
       </div>
       <p className="mt-3 font-display text-lg italic leading-relaxed text-muted-foreground md:text-xl">
-        {verse.scene}
+        {verse.sceneContext}
       </p>
 
       {/* 2. Sanskrit */}
@@ -52,7 +58,7 @@ export function VerseViewer({ verse }: { verse: Verse }) {
 
       {/* 5. What's happening */}
       <SectionBlock icon={<BookOpen className="h-4 w-4" />} label="What's actually happening">
-        {verse.whatsHappening}
+        {verse.whatIsHappening}
       </SectionBlock>
 
       {/* 6. Core philosophy */}
@@ -62,7 +68,7 @@ export function VerseViewer({ verse }: { verse: Verse }) {
 
       {/* 7. Real-life scenario */}
       <SectionBlock icon={<Layers className="h-4 w-4" />} label="Real-life scenario">
-        {verse.realLifeScenario}
+        {verse.realLifeExample}
       </SectionBlock>
 
       {/* 8. Today's mission */}
@@ -85,29 +91,35 @@ export function VerseViewer({ verse }: { verse: Verse }) {
 
       {/* Share */}
       <div className="mt-12 flex flex-wrap items-center gap-3">
+        <ShareModal verse={verse} />
+        <SaveVerseButton verse={verse} />
         <ShareCardButton verse={verse} />
+
         <span className="text-xs text-muted-foreground">
-          <Wind className="mr-1 inline h-3 w-3" /> Chapter {verse.chapter} · Verse {verse.verse}
+
+          <Wind className="mr-1 inline h-3 w-3" /> Chapter {verse.chapterNumber} · Verse {verse.verseNumber}
         </span>
       </div>
 
       {/* 11. Related */}
-      {verse.related.length > 0 && (
+      {related.length > 0 && (
         <section className="mt-16 border-t border-border/40 pt-10">
           <h3 className="font-display text-2xl text-foreground">Related verses</h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {verse.related.map((r) => (
+            {related.map((r) => (
               <Link
-                key={`${r.chapter}.${r.verse}`}
+                key={r.id}
                 to="/verse/$chapter/$verse"
-                params={{ chapter: String(r.chapter), verse: String(r.verse) }}
+                params={{ chapter: String(r.chapterNumber), verse: String(r.verseNumber) }}
                 className="group rounded-xl border border-border/50 bg-card/40 p-5 transition-all hover:border-primary/50 hover:bg-card/70"
               >
                 <div className="flex items-center justify-between text-xs uppercase tracking-[0.28em] text-primary/80">
-                  <span>Ch {r.chapter} · V {r.verse}</span>
+                  <span>Ch {r.chapterNumber} · V {r.verseNumber}</span>
                   <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.note}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  “{r.krishnaModern}”
+                </p>
               </Link>
             ))}
           </div>

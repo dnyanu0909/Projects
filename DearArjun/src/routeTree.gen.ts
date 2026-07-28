@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ChaptersRouteImport } from './routes/chapters'
 import { Route as DailyRouteImport } from './routes/daily'
+import { Route as SavedRouteImport } from './routes/saved'
 import { Route as ChaptersChapterRouteImport } from './routes/chapters.$chapter'
 import { Route as StruggleSlugRouteImport } from './routes/struggle.$slug'
 import { Route as VerseChapterVerseRouteImport } from './routes/verse.$chapter.$verse'
@@ -37,6 +38,11 @@ const DailyRoute = DailyRouteImport.update({
   path: '/daily',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChaptersChapterRoute = ChaptersChapterRouteImport.update({
   id: '/$chapter',
   path: '/$chapter',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/chapters': typeof ChaptersRouteWithChildren
   '/daily': typeof DailyRoute
+  '/saved': typeof SavedRoute
   '/chapters/$chapter': typeof ChaptersChapterRoute
   '/struggle/$slug': typeof StruggleSlugRoute
   '/verse/$chapter/$verse': typeof VerseChapterVerseRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/chapters': typeof ChaptersRouteWithChildren
   '/daily': typeof DailyRoute
+  '/saved': typeof SavedRoute
   '/chapters/$chapter': typeof ChaptersChapterRoute
   '/struggle/$slug': typeof StruggleSlugRoute
   '/verse/$chapter/$verse': typeof VerseChapterVerseRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/chapters': typeof ChaptersRouteWithChildren
   '/daily': typeof DailyRoute
+  '/saved': typeof SavedRoute
   '/chapters/$chapter': typeof ChaptersChapterRoute
   '/struggle/$slug': typeof StruggleSlugRoute
   '/verse/$chapter/$verse': typeof VerseChapterVerseRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/chapters'
     | '/daily'
+    | '/saved'
     | '/chapters/$chapter'
     | '/struggle/$slug'
     | '/verse/$chapter/$verse'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/chapters'
     | '/daily'
+    | '/saved'
     | '/chapters/$chapter'
     | '/struggle/$slug'
     | '/verse/$chapter/$verse'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/chapters'
     | '/daily'
+    | '/saved'
     | '/chapters/$chapter'
     | '/struggle/$slug'
     | '/verse/$chapter/$verse'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ChaptersRoute: typeof ChaptersRouteWithChildren
   DailyRoute: typeof DailyRoute
+  SavedRoute: typeof SavedRoute
   StruggleSlugRoute: typeof StruggleSlugRoute
   VerseChapterVerseRoute: typeof VerseChapterVerseRoute
 }
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/daily'
       fullPath: '/daily'
       preLoaderRoute: typeof DailyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chapters/$chapter': {
@@ -191,6 +211,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ChaptersRoute: ChaptersRouteWithChildren,
   DailyRoute: DailyRoute,
+  SavedRoute: SavedRoute,
   StruggleSlugRoute: StruggleSlugRoute,
   VerseChapterVerseRoute: VerseChapterVerseRoute,
 }

@@ -1,53 +1,71 @@
+// types.ts
+
 export type AmbientTheme = "battlefield" | "cosmic" | "forest";
 
-export type StruggleSlug =
-  | "anxiety"
-  | "heartbreak"
-  | "exams"
-  | "career"
-  | "discipline"
-  | "money";
+// ─── Struggle ────────────────────────────────────────────────────────────────
 
-export type Struggle = {
-  slug: StruggleSlug;
-  emoji: string;
+export const STRUGGLE_CATEGORIES = [
+  "anxiety",
+  "heartbreak",
+  "exams",
+  "career",
+  "discipline",
+  "money",
+  "purpose",
+] as const;
+
+export type StruggleCategory = (typeof STRUGGLE_CATEGORIES)[number];
+
+/** @deprecated Use StruggleCategory */
+export type StruggleSlug = StruggleCategory;
+
+export interface Struggle {
+  id: StruggleCategory;
   label: string;
+  emoji: string;
+  /** One-line hook shown on the empathy grid. */
   tagline: string;
-  intro: string;
-  verses: Array<{ chapter: number; verse: number }>;
-};
+  /** Longer intro shown at the top of the struggle page. */
+  description: string;
+  recommendedVerseIds: string[]; // e.g., ["2.47", "6.5"]
+}
 
-export type Chapter = {
+// ─── Chapter ─────────────────────────────────────────────────────────────────
+
+export interface Chapter {
   number: number;
   sanskritName: string;
   englishName: string;
   theme: string;
   ambient: AmbientTheme;
   verseCount: number;
-};
+}
 
-export type RelatedVerse = {
-  chapter: number;
-  verse: number;
-  note: string;
-};
+// ─── Verse ───────────────────────────────────────────────────────────────────
 
-export type Verse = {
-  chapter: number;
-  verse: number;
-  scene: string;
+export interface Verse {
+  id: string; // e.g., "2.47"
+  chapterNumber: number;
+  verseNumber: number;
+  ambient: AmbientTheme;
+  struggles: StruggleCategory[];
+
+  // 11-Part Template Fields
+  sceneContext: string;
   sanskrit: string;
   translation: string;
   krishnaModern: string;
-  whatsHappening: string;
+  whatIsHappening: string;
   corePhilosophy: string;
-  realLifeScenario: string;
+  realLifeExample: string;
   todaysMission: string;
   reflectionQuestion: string;
   gentleNudge: string;
-  related: RelatedVerse[];
-  struggles: StruggleSlug[];
-  ambient: AmbientTheme;
-};
+  relatedVerseIds: string[]; // Array of verse IDs e.g. ["2.14", "2.48"]
+}
 
-export const verseKey = (c: number, v: number) => `${c}.${v}`;
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Build a verse ID string from chapter + verse numbers */
+export const verseKey = (chapter: number, verse: number): string =>
+  `${chapter}.${verse}`;

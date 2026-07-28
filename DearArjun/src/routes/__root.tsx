@@ -9,11 +9,12 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../style_deararjun.css?url";
+import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { AmbientBackground } from "@/components/layout/AmbientBackground";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -132,6 +133,8 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
+      <Toaster />
     </QueryClientProvider>
+
   );
 }

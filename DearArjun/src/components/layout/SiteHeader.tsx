@@ -31,12 +31,20 @@ export function SiteHeader() {
           Daily
         </Link>
         <Link
+          to="/saved"
+          className="text-muted-foreground transition-colors hover:text-primary"
+          activeProps={{ className: "text-primary" }}
+        >
+          Saved
+        </Link>
+        <Link
           to="/about"
           className="text-muted-foreground transition-colors hover:text-primary"
           activeProps={{ className: "text-primary" }}
         >
           About
         </Link>
+
         <AmbientAudioToggle />
       </nav>
     </header>

@@ -14,18 +14,18 @@ export function DailyKurukshetra() {
           “{v.krishnaModern}”
         </h2>
         <p className="mt-4 text-sm text-muted-foreground">
-          {v.scene}
+          {v.sceneContext}
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-4">
           <Link
             to="/verse/$chapter/$verse"
-            params={{ chapter: String(v.chapter), verse: String(v.verse) }}
+            params={{ chapter: String(v.chapterNumber), verse: String(v.verseNumber) }}
             className="inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
           >
             Sit with this verse
           </Link>
           <span className="text-xs text-muted-foreground">
-            Chapter {v.chapter} · Verse {v.verse}
+            Chapter {v.chapterNumber} · Verse {v.verseNumber}
           </span>
         </div>
       </div>

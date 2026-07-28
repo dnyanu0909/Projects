@@ -2,90 +2,68 @@ import type { Struggle } from "./types";
 
 export const struggles: Struggle[] = [
   {
-    slug: "anxiety",
+    id: "anxiety",
     emoji: "😔",
     label: "Anxiety & Overthinking",
     tagline: "The mind that won't stop running.",
-    intro:
+    description:
       "You're carrying tomorrow's weight today. Krishna spoke to a warrior frozen by the same storm.",
-    verses: [
-      { chapter: 2, verse: 47 },
-      { chapter: 6, verse: 35 },
-      { chapter: 2, verse: 14 },
-      { chapter: 18, verse: 66 },
-    ],
+    recommendedVerseIds: ["2.47", "6.35", "2.14", "2.56", "18.66", "2.58"],
   },
   {
-    slug: "heartbreak",
+    id: "heartbreak",
     emoji: "💔",
     label: "Heartbreak & Relationships",
     tagline: "When someone becomes your whole sky.",
-    intro:
+    description:
       "Attachment feels like love until it starts to break you. There's a way through that isn't numbness.",
-    verses: [
-      { chapter: 2, verse: 62 },
-      { chapter: 2, verse: 63 },
-      { chapter: 12, verse: 13 },
-      { chapter: 2, verse: 14 },
-    ],
+    recommendedVerseIds: ["2.62", "2.63", "12.13", "2.14", "2.71", "12.14"],
   },
   {
-    slug: "exams",
+    id: "exams",
     emoji: "📚",
     label: "Exams & Pressure",
     tagline: "The result is louder than the work.",
-    intro:
+    description:
       "Arjuna asked the same thing before the biggest test of his life. Krishna didn't tell him to relax — he told him where to put his attention.",
-    verses: [
-      { chapter: 2, verse: 47 },
-      { chapter: 2, verse: 48 },
-      { chapter: 6, verse: 5 },
-      { chapter: 3, verse: 35 },
-    ],
+    recommendedVerseIds: ["2.47", "2.48", "6.5", "3.35", "2.3"],
   },
   {
-    slug: "career",
+    id: "career",
     emoji: "💼",
-    label: "Career & Purpose",
+    label: "Career & Work",
     tagline: "What am I actually supposed to do?",
-    intro:
+    description:
       "Doing someone else's dharma well is still worse than doing your own imperfectly. Start where you actually stand.",
-    verses: [
-      { chapter: 3, verse: 35 },
-      { chapter: 18, verse: 47 },
-      { chapter: 2, verse: 47 },
-      { chapter: 6, verse: 5 },
-    ],
+    recommendedVerseIds: ["3.35", "18.47", "2.47", "18.45", "4.18", "3.8"],
   },
   {
-    slug: "discipline",
+    id: "discipline",
     emoji: "🔥",
     label: "Discipline & Sloth",
     tagline: "You know what to do. You're just not doing it.",
-    intro:
+    description:
       "The mind is the friend of the disciplined and the enemy of the undisciplined. Krishna was very direct about this.",
-    verses: [
-      { chapter: 6, verse: 5 },
-      { chapter: 6, verse: 6 },
-      { chapter: 6, verse: 35 },
-      { chapter: 3, verse: 35 },
-    ],
+    recommendedVerseIds: ["6.5", "6.6", "6.35", "6.34", "3.8", "6.26"],
   },
   {
-    slug: "money",
+    id: "money",
     emoji: "💸",
     label: "Money & Security",
     tagline: "Enough never quite feels like enough.",
-    intro:
+    description:
       "Chasing the fruit while ignoring the tree. Krishna's answer isn't renunciation of work — it's renunciation of the frenzy around it.",
-    verses: [
-      { chapter: 2, verse: 47 },
-      { chapter: 2, verse: 70 },
-      { chapter: 12, verse: 13 },
-      { chapter: 18, verse: 66 },
-    ],
+    recommendedVerseIds: ["2.47", "2.70", "12.13", "18.66", "2.71"],
+  },
+  {
+    id: "purpose",
+    emoji: "🧭",
+    label: "Purpose & Meaning",
+    tagline: "Why any of this, at all.",
+    description:
+      "When the question isn't how to do the work but why. Krishna answers Arjuna's version of it on a battlefield, with everything at stake.",
+    recommendedVerseIds: ["3.35", "18.45", "18.47", "11.12", "5.23", "4.18"],
   },
 ];
 
-export const getStruggle = (slug: string) =>
-  struggles.find((s) => s.slug === slug);
+export const getStruggle = (id: string) => struggles.find((s) => s.id === id);

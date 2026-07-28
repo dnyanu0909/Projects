@@ -7,9 +7,9 @@ export function EmpathyGrid() {
     <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {struggles.map((s) => (
         <Link
-          key={s.slug}
+          key={s.id}
           to="/struggle/$slug"
-          params={{ slug: s.slug }}
+          params={{ slug: s.id }}
           className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-[var(--shadow-glow)]"
         >
           <div className="text-3xl">{s.emoji}</div>
